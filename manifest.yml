@@ -1,0 +1,15 @@
+---
+applications:
+- name: app-dependency-discoverer
+  memory: 256M
+  instances: 1
+  path: .
+  buildpack: go_buildpack
+  env:
+    AUTH_USER: admin
+    AUTH_PASS: password
+    CLIENT_ID: <provide oauth2 client id>
+    CLIENT_SECRET: <provide oauth2 client secret>
+    TOKEN_URL: <provide token url>
+    CF_API: <provide api url>
+    VERSION: "0.1.0"
