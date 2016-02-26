@@ -1,0 +1,54 @@
+package graph
+
+import (
+	"errors"
+	"fmt"
+	log "github.com/cihub/seelog"
+	"github.com/trustedanalytics/go-cf-lib/types"
+	"github.com/trustedanalytics/go-cf-lib/wrapper"
+	"github.com/twmb/algoimpl/go/graph"
+)
+
+type GraphAPI struct {
+	w *wrapper.CfAPIWrapper
+}
+
+func NewGraphAPI() *GraphAPI {
+	toReturn := new(GraphAPI)
+	toReturn.w = wrapper.NewCfAPIWrapper()
+	return toReturn
+}
+
+// Returns a list of services and apps which would be provisioned in normal run
+func (gr *GraphAPI) Discover(sourceAppGUID string) ([]types.Component, error) {
+	sourceAppSummary, err := gr.w.GetAppSummary(sourceAppGUID)
+	if err != nil {
+		return nil, err
+	}
+
+	g := graph.New(graph.Directed)
+	dg := NewDependencyGraph()
+	root := dg.NewNode(g, sourceAppGUID, sourceAppSummary.Name, types.ComponentApp, nil, true)
+	_ = dg.addDependenciesToGraph(g, root, sourceAppGUID)
+	if dg.graphHasCycles(g) {
+		return nil, errors.New("Graph has cycles and stack cannot be copied")
+	} else {
+		log.Infof("Graph has no cycles")
+	}
+
+	// Calculate topological order
+	sorted := g.TopologicalSort()
+	log.Infof("Topological Order:\n")
+	ret := make([]types.Component, len(sorted))
+	// Reverse order
+	for i, node := range sorted {
+		text := ""
+		for _, n := range g.Neighbors(node) {
+			text += fmt.Sprint((*n.Value).(types.Component).Name) + ", "
+		}
+		log.Infof("%v [%v]", (*node.Value).(types.Component).Name, text)
+		ret[len(sorted)-1-i] = (*node.Value).(types.Component)
+	}
+
+	return ret, nil
+}
