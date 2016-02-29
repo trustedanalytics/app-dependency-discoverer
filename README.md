@@ -28,57 +28,57 @@ Example response body:
 [
   {
     "GUID": "b12e08f1-0329-471e-9cc7-9a26bb24b072",
-    "Name": "mycdh",
-    "Type": "Service",
-    "DependencyOf": [
+    "name": "mycdh",
+    "type": "Service",
+    "dependencyOf": [
       "ce44ee69-32b4-4e6f-a952-a10b0d522021",
       "90492a34-1f00-43b5-bcec-828456d8981a"
     ],
-    "Clone": true
+    "clone": true
   },
   {
     "GUID": "ca47e7b4-cf3f-443b-ac40-a5c99e36b232",
-    "Name": "myhdfs",
-    "Type": "Service",
-    "DependencyOf": [
+    "name": "myhdfs",
+    "type": "Service",
+    "dependencyOf": [
       "ce44ee69-32b4-4e6f-a952-a10b0d522021",
       "90492a34-1f00-43b5-bcec-828456d8981a"
     ],
-    "Clone": true
+    "clone": true
   },
   {
     "GUID": "f09c5d58-34fb-4a69-9658-062314be9711",
-    "Name": "myrabbit",
-    "Type": "Service",
-    "DependencyOf": [
+    "name": "myrabbit",
+    "type": "Service",
+    "dependencyOf": [
       "ce44ee69-32b4-4e6f-a952-a10b0d522021"
     ],
-    "Clone": true
+    "clone": true
   },
   {
     "GUID": "90492a34-1f00-43b5-bcec-828456d8981a",
-    "Name": "app1",
-    "Type": "Application",
-    "DependencyOf": [
+    "name": "app1",
+    "type": "Application",
+    "dependencyOf": [
       "ff8e11cf-de1a-4c27-abdf-a827d447e74a"
     ],
-    "Clone": true
+    "clone": true
   },
   {
     "GUID": "ff8e11cf-de1a-4c27-abdf-a827d447e74a",
-    "Name": "app1-ups",
-    "Type": "User provided service",
-    "DependencyOf": [
+    "name": "app1-ups",
+    "type": "User provided service",
+    "dependencyOf": [
       "ce44ee69-32b4-4e6f-a952-a10b0d522021"
     ],
-    "Clone": true
+    "clone": true
   },
   {
     "GUID": "ce44ee69-32b4-4e6f-a952-a10b0d522021",
-    "Name": "toplvlapp1",
-    "Type": "Application",
-    "DependencyOf": [],
-    "Clone": true
+    "name": "toplvlapp1",
+    "type": "Application",
+    "dependencyOf": [],
+    "clone": true
   }
 ]
 ```
