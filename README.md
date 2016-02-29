@@ -6,14 +6,16 @@ This application can discover dependencies of application stack with provided ro
 cf cups <hostname>-ups -p url
 url> http://<hostname>.<domain>
 ```
+Applications linked must be in the same space.
+
 
 This is an app which:
  
  * inquiry CF for dependencies of application provided in rootGUID, 
- * constructs dependency tree, 
- * check for cycles
- * if they exist, application stack cannot be cloned (there is no order it could be spawned)
- * if dependency tree is direct acyclic graph, application returns a list of components from specified application stack in reversed topological order (in which it can be cloned): guid, name, type, list of dependent components and other pieces of information useful when cloning
+ * constructs dependency tree,
+ * check for cycles,
+ * if they exist, application stack cannot be cloned (there is no order it could be spawned),
+ * if dependency tree is direct acyclic graph, application returns a list of components from specified application stack in reversed topological order (in which they can be cloned): guid, name, type, list of dependent components and other pieces of information useful when cloning
    
 
 ### Idea behind
