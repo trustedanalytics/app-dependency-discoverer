@@ -19,7 +19,7 @@ func NewGraphAPI() *GraphAPI {
 	return toReturn
 }
 
-// Returns a list of services and apps which would be provisioned in normal run
+// Returns a list of services and apps in application stack in reversed topological order
 func (gr *GraphAPI) Discover(sourceAppGUID string) ([]types.Component, error) {
 	sourceAppSummary, err := gr.w.GetAppSummary(sourceAppGUID)
 	if err != nil {
@@ -42,13 +42,17 @@ func (gr *GraphAPI) Discover(sourceAppGUID string) ([]types.Component, error) {
 	ret := make([]types.Component, len(sorted))
 	// Reverse order
 	for i, node := range sorted {
-		text := ""
-		for _, n := range g.Neighbors(node) {
-			text += fmt.Sprint((*n.Value).(types.Component).Name) + ", "
-		}
-		log.Infof("%v [%v]", (*node.Value).(types.Component).Name, text)
+		log.Infof(gr.showNodeWithNeighbours(g, &node))
 		ret[len(sorted)-1-i] = (*node.Value).(types.Component)
 	}
 
 	return ret, nil
+}
+
+func (gr *GraphAPI) showNodeWithNeighbours(g *graph.Graph, node *graph.Node) string {
+	text := ""
+	for _, n := range g.Neighbors(*node) {
+		text += fmt.Sprint((*n.Value).(types.Component).Name) + ", "
+	}
+	return fmt.Sprintf("%v [%v]", (*node.Value).(types.Component).Name, text)
 }

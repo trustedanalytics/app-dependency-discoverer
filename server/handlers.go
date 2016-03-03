@@ -38,7 +38,7 @@ func (*Handlers) Discover(w http.ResponseWriter, r *http.Request, params martini
 		respondWithError(&w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	log.Info(result)
+	log.Debugf("Sent: %v", result)
 
 	w.WriteHeader(http.StatusOK)
 	encoder := json.NewEncoder(w)
