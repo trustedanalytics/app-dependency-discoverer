@@ -4,18 +4,18 @@ import (
 	"errors"
 	"fmt"
 	log "github.com/cihub/seelog"
+	"github.com/trustedanalytics/go-cf-lib/api"
 	"github.com/trustedanalytics/go-cf-lib/types"
-	"github.com/trustedanalytics/go-cf-lib/wrapper"
 	"github.com/twmb/algoimpl/go/graph"
 )
 
 type GraphAPI struct {
-	w *wrapper.CfAPIWrapper
+	w *api.CfAPI
 }
 
 func NewGraphAPI() *GraphAPI {
 	toReturn := new(GraphAPI)
-	toReturn.w = wrapper.NewCfAPIWrapper()
+	toReturn.w = api.NewCfAPI()
 	return toReturn
 }
 

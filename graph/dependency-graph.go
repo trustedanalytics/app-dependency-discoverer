@@ -19,21 +19,21 @@ package graph
 import (
 	"fmt"
 	log "github.com/cihub/seelog"
+	"github.com/trustedanalytics/go-cf-lib/api"
 	"github.com/trustedanalytics/go-cf-lib/types"
-	"github.com/trustedanalytics/go-cf-lib/wrapper"
 	"github.com/twmb/algoimpl/go/graph"
 	"net/url"
 	"strings"
 )
 
 type DependencyGraph struct {
-	cf    *wrapper.CfAPIWrapper
+	cf    *api.CfAPI
 	nodes map[string]graph.Node
 }
 
 func NewDependencyGraph() *DependencyGraph {
 	toReturn := new(DependencyGraph)
-	toReturn.cf = wrapper.NewCfAPIWrapper()
+	toReturn.cf = api.NewCfAPI()
 	toReturn.nodes = make(map[string]graph.Node)
 	return toReturn
 }
