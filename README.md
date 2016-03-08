@@ -14,13 +14,15 @@ This is an app which:
  * inquiry CF for dependencies of application provided in rootGUID, 
  * constructs dependency tree,
  * check for cycles,
- * if they exist, application stack cannot be cloned (there is no order it could be spawned),
+ * if they exist, application stack cannot be cloned (there is no order that it could be spawned in),
  * if dependency tree is direct acyclic graph, application returns a list of components from specified application stack in reversed topological order (in which they can be cloned): guid, name, type, list of dependent components and other pieces of information useful when cloning
    
 
 ### Idea behind
 
 This app can be used by new [application broker](https://github.com/trustedanalytics/application-broker/) to retrieve list of components which should be cloned when spawning application stack based on existing stack.
+
+[![Example stack](https://github.com/intel-data/app-dependency-discoverer/blob/DPNG-5455/example_tree.png)](https://github.com/intel-data/app-dependency-discoverer/blob/DPNG-5455/example_tree.png)
 
 GET /v1/discover/< rootGUID >
 ```
@@ -103,3 +105,4 @@ Command above places all dependencies from `$GOPATH`, your app uses, in Godeps a
 ### TODO
 
 * Allow to reuse parts of stack in next clones
+* DPNG-5722 Enable asynchronous operations in application-broker to support stacks with high number of long-starting apps
