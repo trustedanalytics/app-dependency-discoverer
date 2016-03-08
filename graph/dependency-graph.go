@@ -39,10 +39,10 @@ func NewDependencyGraph() *DependencyGraph {
 }
 
 func (dg *DependencyGraph) NewNode(g *graph.Graph, guid, name string, typ types.ComponentType,
-	dependent *graph.Node, clone bool) graph.Node {
+	parent *graph.Node, clone bool) graph.Node {
 
 	if node, ok := dg.nodes[guid]; ok {
-		dg.appendDependency(&node, dependent)
+		dg.appendAsDependency(&node, parent)
 		return node
 	}
 	node := g.MakeNode()
@@ -53,15 +53,15 @@ func (dg *DependencyGraph) NewNode(g *graph.Graph, guid, name string, typ types.
 		DependencyOf: []string{},
 		Clone:        clone,
 	}
-	dg.appendDependency(&node, dependent)
+	dg.appendAsDependency(&node, parent)
 	dg.nodes[guid] = node
 	return node
 }
 
-func (dg *DependencyGraph) appendDependency(node *graph.Node, dependent *graph.Node) {
-	if dependent != nil {
+func (dg *DependencyGraph) appendAsDependency(node *graph.Node, parent *graph.Node) {
+	if parent != nil {
 		dependencyOf := (*node.Value).(types.Component).DependencyOf
-		dependencyOf = append(dependencyOf, (*dependent.Value).(types.Component).GUID)
+		dependencyOf = append(dependencyOf, (*parent.Value).(types.Component).GUID)
 		value := (*node.Value).(types.Component)
 		value.DependencyOf = dependencyOf
 		*node.Value = value
