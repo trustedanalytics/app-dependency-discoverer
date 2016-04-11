@@ -157,11 +157,11 @@ func (dg *DependencyGraph) getAppIdAndNameFromSpaceByUrl(spaceGUID, urlStr strin
 	}
 	app := apps.Resources[0]
 	log.Debugf("App %+v", app)
-	isSearched, err := dg.doesUrlMatchApplication(urlStr, app.Meta.GUID)
+	wasFound, err := dg.doesUrlMatchApplication(urlStr, app.Meta.GUID)
 	if err != nil {
 		return "", "", err
 	}
-	if !isSearched {
+	if !wasFound {
 		log.Infof("url of found app does not match url in user provided service")
 		return "", "", nil
 

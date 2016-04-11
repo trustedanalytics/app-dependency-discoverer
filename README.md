@@ -22,7 +22,7 @@ This is an app which:
 
 This app can be used by new [application broker](https://github.com/trustedanalytics/application-broker/) to retrieve list of components which should be cloned when spawning application stack based on existing stack.
 
-[![Example stack](https://github.com/intel-data/app-dependency-discoverer/blob/DPNG-5455/example_tree.png)](https://github.com/intel-data/app-dependency-discoverer/blob/DPNG-5455/example_tree.png)
+[![Example stack](https://github.com/intel-data/app-dependency-discoverer/blob/master/example_tree.png)](https://github.com/intel-data/app-dependency-discoverer/blob/master/example_tree.png)
 
 GET /v1/discover/< rootGUID >
 ```
