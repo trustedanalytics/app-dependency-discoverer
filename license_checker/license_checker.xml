@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>application-broker</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
+    <groupId>org.trustedanalytics</groupId>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <header>${project.basedir}/license_header.txt</header>
+                    <basedir>..</basedir>
+                    <includes>
+                        <include>graph/*.go</include>
+                        <include>license_checker/*.sh</include>
+                        <include>main.go</include>
+                        <include>logging/*.go</include>
+                        <include>server/*.go</include>
+                    </includes>
+                    <mapping>
+                        <go>JAVADOC_STYLE</go>
+                        <sh>SCRIPT_STYLE</sh>
+                    </mapping>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-license</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
