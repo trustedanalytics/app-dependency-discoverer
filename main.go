@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+// Package main app-dependency-discoverer API
+//
+// This application can discover dependencies of application stack with provided root GUID.
+//
+//     Version: 0.1.1
+//
+// swagger:meta
 package main
 
 import (

@@ -26,6 +26,18 @@ import (
 
 type Handlers struct{}
 
+// swagger:route GET /v1/discover/{rootGUID} discover
+//
+// Discover dependency tree of specified application in Cloud Foundry, constructs a graph and check for cycles.
+//
+// Privilege level: Consumer of this endpoint must login using basic authentication credentials (valid login and password)
+//
+// Returns the list of components to spawn in reversed topological order.
+//
+//     Responses:
+//       200: componentsListResponse
+//       400: serverError
+//       500: serverError
 func (*Handlers) Discover(w http.ResponseWriter, r *http.Request, params martini.Params) {
 	if _, ok := params["rootGUID"]; !ok {
 		respondWithError(&w, http.StatusBadRequest, "No root GUID provided")

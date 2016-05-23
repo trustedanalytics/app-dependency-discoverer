@@ -17,28 +17,20 @@
 package server
 
 import (
-	"encoding/json"
-	log "github.com/cihub/seelog"
-	"net/http"
+	"github.com/trustedanalytics/go-cf-lib/types"
 )
 
-// ServerError
-// swagger:response serverError
-type ServerError struct {
+// ComponentsListResponse
+// swagger:response componentsListResponse
+type ComponentsListResponse struct {
 	// in: body
-	Status int    `json:"status"`
-	Error  string `json:"error"`
+	Body []types.Component
 }
 
-func respondWithError(w *http.ResponseWriter, status int, errorMsg string) {
-	(*w).WriteHeader(status)
-	log.Errorf(errorMsg)
-	msg := ServerError{
-		Status: status,
-		Error:  errorMsg,
-	}
-	payload, err := json.Marshal(msg)
-	if err == nil {
-		(*w).Write(payload)
-	}
+// swagger:parameters discover
+type RootGUIDParam struct {
+	// Root application GUID
+	// in: path
+	// required: true
+	RootGUID string `json:"rootGUID"`
 }
