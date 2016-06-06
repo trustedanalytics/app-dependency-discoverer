@@ -18,7 +18,7 @@
 //
 // This application can discover dependencies of application stack with provided root GUID.
 //
-//     Version: 0.1.3
+//     Version: 0.1.4
 //
 // swagger:meta
 package main
